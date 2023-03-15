@@ -80,7 +80,7 @@ public class HelloServlet extends HttpServlet {
 				(3) location.href='http://localhost:9090/01_Servlet/HelloServlet'	JavaScript 에선 location객체가 <a> 태그와 같은 일을 한다.
 				(4) open(http://localhost:9090/01_Servlet/HelloServlet, '', '')		open 함수
 				(5) $.ajax({
-						type: 'GET',
+						type: 'GET',												type을 생략해주면 디폴트값인 GET 방식이 됨
 						url: 'http://localhost:9090/01_Servlet/HelloServlet'
 						});
 	*/
