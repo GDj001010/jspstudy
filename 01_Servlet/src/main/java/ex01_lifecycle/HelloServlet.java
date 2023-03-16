@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 		http://localhost:9090/01_Servlet/HelloServlet
 */
 
-@WebServlet(asyncSupported = true, urlPatterns = { "/HelloServlet" })	// URLMapping 값
+@WebServlet("/HelloServlet")	// URLMapping 값
 public class HelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

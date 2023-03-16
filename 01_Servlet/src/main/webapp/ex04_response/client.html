@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../resources/js/lib/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+	<div id="model">TV</div>
+	<div id="price">100</div>
+	<input type="button" value="파라미터전송" id="btn">
+	
+	<!-- 
+	 응답
+	 웹에서 사용하는 마인타입 = type="text/javascript" -->
+	<script>
+		$('#btn').on('click', function(ev){
+			location.href = '/01_Servlet/ResponseServlet?model=' + $('#model').text() + '&price=' + $('#price').text();           
+		});
+	</script>
+
+</body>
+</html>
