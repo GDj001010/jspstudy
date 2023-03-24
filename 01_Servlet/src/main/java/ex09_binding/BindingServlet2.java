@@ -1,4 +1,4 @@
-package ex06_forward;
+package ex09_binding;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,28 +8,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/ForwardServlet1")
-public class ForwardServlet1 extends HttpServlet {
+@WebServlet("/BindingServlet2")
+
+public class BindingServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-    public ForwardServlet1() {
+
+    public BindingServlet2() {
         super();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 값을 전달하며 이동
-		// 포워드 이전(첫 번째 요청) 파라미터 확인
-		String model = request.getParameter("model");
-		System.out.println("ForwardServlet1 : " + model);
+		// HttpServletRequest에 저장된 속성 확인
+		request.setCharacterEncoding("UTF-8");
 		
-		// 포워드 (전달)
-		request.getRequestDispatcher("/ForwardServlet2").forward(request, response); // URLMapping만 작성, ForwardServlet2번으로 request, response 그대로 전달
+		System.out.println(request.getAttribute("a"));
+		
+		// HttpSession에 저장된 속성 확인
+		System.out.println((int)request.getSession().getAttribute("a"));
+		
+		// ServletContext에 저장된 속성 확인
+		System.out.println((int)request.getServletContext().getAttribute("a"));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

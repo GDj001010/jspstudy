@@ -21,6 +21,7 @@ public class RedirectServlet1 extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// <a> 태그, location 과 동일한 기능, stateless한 이동 (값을 갖지 않고 이동)
 		// 리다이렉트 이전(첫 번째 요청)의 파라미터 확인하기
 		// 첫 번째 요청 : /01_Servlet/RedirectServlet1?model=TV
 		request.setCharacterEncoding("UTF-8");

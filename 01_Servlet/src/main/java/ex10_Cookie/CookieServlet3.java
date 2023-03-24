@@ -1,32 +1,38 @@
-package ex06_forward;
+package ex10_Cookie;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/ForwardServlet1")
-public class ForwardServlet1 extends HttpServlet {
+@WebServlet("/CookieServlet3")
+
+public class CookieServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-    public ForwardServlet1() {
+
+    public CookieServlet3() {
         super();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		// 쿠키 받아오기
+		Cookie[] cookies = request.getCookies();
 		
-		// 값을 전달하며 이동
-		// 포워드 이전(첫 번째 요청) 파라미터 확인
-		String model = request.getParameter("model");
-		System.out.println("ForwardServlet1 : " + model);
-		
-		// 포워드 (전달)
-		request.getRequestDispatcher("/ForwardServlet2").forward(request, response); // URLMapping만 작성, ForwardServlet2번으로 request, response 그대로 전달
+		// 쿠키 확인하기
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				System.out.println("CookieServlet3 쿠키이름 : " + cookie.getName() + ", 쿠키값 : " + URLDecoder.decode(cookie.getValue(), "UTF-8"));
+			}
+		}
 		
 	}
 
