@@ -12,6 +12,7 @@
 <body>
 	
 	<h3><a href="${contextPath}/today.do">오늘은 며칠입니까?</a></h3>
+	<h3>${contextPath }</h3>
 	
 	<form action="${contextPath}/age.do">
 		<select name="birthyear">
