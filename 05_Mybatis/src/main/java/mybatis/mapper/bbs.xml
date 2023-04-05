@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- namespace는 mybatis.mapper.bbs.xml 파일을 의미한다. -->
+ <!-- bbs.xml 경로 (.xml(확장자)를 뺀다, 패키지 구분을 .으로 하기 때문에 xml 파일을 찾기 때문이다) -->
+<mapper namespace="mybatis.mapper.bbs">
+	
+	<!-- 목록 보기 -->
+	<!-- 쿼리문에서 반환되는 데이터가 하나인지 여러개인지 고려하지 않기 때문에 list여도 BbsDTO(패키지가 필요해서 앞에 피키지까지 입력해준다.)만 입력해준다. -->
+	<!-- 예시 : domian.BbsDTO = 하지만 mybatis-config에서 별명설정을 domain.BbsDTO를 Bbs로 바꿔줬기 때문에 Bbs만 입력해도 된다. -->
+	<select id="selectAllBbsList" resultType="Bbs">
+		SELECT BBS_NO, TITLE, CONTENT, MODIFIED_DATE, CREATED_DATE
+		  FROM BBS
+		 ORDER BY BBS_NO DESC
+	</select>
+	
+	<!-- 상세 -->
+	<!-- 첫 글자가 대문자인 객체 Integer 타입으로 사용하는 습관도 좋을 수도 있다. -->
+	<select id="selectBbsByNo" parameterType="int" resultType="Bbs">
+		SELECT BBS_NO, TITLE, CONTENT, MODIFIED_DATE, CREATED_DATE
+		  FROM BBS
+		 WHERE BBS_NO = #{bbsNo}	<!-- #{변수값} -->
+	</select>
+	
+	<!-- 삽입 -->
+	<!-- mybatis가 BbsDTO의 getter를 찾아 필드값을 직접 가져온다. -->
+	<!-- mybatis가 getTitle(getter)을 직접 찾아 앞글자를 대문자로 바꿔주기 때문에 앞글자를 소문자로 해줘야 된다. -->
+	<!-- INSERT DELETE UPDATE 는 결과값이 당연히 int 이기 때문에 resultType을 안 적어도 알아서 int로 반환한다. -->
+	<insert id="insertBbs" parameterType="Bbs">
+		INSERT INTO BBS
+			(BBS_NO, TITLE, CONTENT, CREATED_DATE)
+		VALUES
+			(BBS_SEQ.NEXTVAL, #{title}, #{content}, TO_CHAR(SYSDATE, 'yy.MM.dd HH:mm:ss'))
+	</insert>
+	
+	<!-- 수정 -->
+	
+	<update id="updateBbs" parameterType="Bbs">
+		UPDATE BBS
+		   SET TITLE = #{title}
+		     , CONTENT = #{content}
+		     , MODIFIED_DATE = TO_CHAR(SYSDATE, 'yy.MM.dd HH:mm:ss')
+		 WHERE BBS_NO = #{bbsNo}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteBbs" parameterType="int">
+		DELETE
+		  FROM BBS
+		 WHERE BBS_NO = #{bbsNo}
+	</delete>
+	
+	<!-- 만약 처음보는 모르는 타입을 적을 때 
+		 mybatis.org 에 매퍼설정 중간쯤 보면 타입이 나와있다. -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
