@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- namespace는 mybatis.mapper.bbs.xml 파일을 의미한다. -->
+ <!-- bbs.xml 경로 (.xml(확장자)를 뺀다, 패키지 구분을 .으로 하기 때문에 xml 파일을 찾기 때문이다) -->
+<mapper namespace="mybatis.mapper.member">
+	
+	<!-- 목록 보기 -->
+	<!-- 쿼리문에서 반환되는 데이터가 하나인지 여러개인지 고려하지 않기 때문에 list여도 Member(패키지가 필요해서 앞에 피키지까지 입력해준다.)만 입력해준다. -->
+	<!-- 예시 : domian.Member = 하지만 mybatis-config에서 별명설정을 domain.Member를 Member로 바꿔줬기 때문에 Member만 입력해도 된다. -->
+	<select id="selectAllMembers" resultType="Member">
+		SELECT MEMBER_NO, ID, NAME, GENDER , ADDRESS
+		  FROM MEMBER
+		 ORDER BY MEMBER_NO DESC
+	</select>
+	
+	<!-- 전체 회원 수 -->
+	<select id="getMemberCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+	</select>
+	
+	<!-- 상세 -->
+	<select id="selectMemberByNo" parameterType="int" resultType="Member">
+		SELECT MEMBER_NO, ID, NAME, GENDER , ADDRESS
+		  FROM MEMBER
+		 WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 삽입 -->
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER
+			(MEMBER_NO, ID, NAME, GENDER , ADDRESS)
+		VALUES
+			(MEMBER_SEQ.NEXTVAL, #{id}, #{name}, #{gender}, #{address})
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		   SET NAME = #{name}
+		     , GENDER = #{gender}
+		     , ADDRESS = #{address}
+		 WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	<!-- 삭제 -->
+	<delete id="deleteMember" parameterType="int">
+		DELETE
+		  FROM MEMBER
+		 WHERE MEMBER_NO = #{memberNo}
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+</mapper>

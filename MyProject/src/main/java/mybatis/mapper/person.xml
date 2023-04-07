@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="mybatis.domain.person">
+ 
+ 	<select id="selectAllPersonList" resultType="Person">
+ 		SELECT PERSON_NO, NAME, AGE, GENDER, MODIFIED_DATE, CREATED_DATE
+ 		  FROM PERSON
+ 		 ORDER BY PERSON_NO DESC;
+ 	</select>
+ 	
+ 	<select id="selectDetailPerson" parameterType="int" resultType="Person">
+ 		SELECT PERSON_NO, NAME, AGE, GENDER, CREATED_DATE
+ 		  FROM PERSON
+ 		 WHERE PERSON_NO = #{personNo}
+ 	</select>
+ 	
+ 	<insert id="insertPerson" parameterType="Person">
+ 		INSERT INTO PERSON
+ 			(PERSON_NO, NAME, AGE, GENDER, MODIFIED_DATE, CREATED_DATE)
+ 		VALUES
+ 			(PERSON_SEQ, #{name}, #{age}, #{gender}, SYSDATE)
+ 	</insert>
+ 	
+ 	<update id="updatePerson" parameterType="Person">
+ 		UPDATE PERSON
+ 		   SET NAME = #{name}
+ 		   	 , AGE = #{age}
+ 		   	 , GENDER = #{gender}
+ 		   	 , MODIFIED_DATE = SYSDATE
+ 		 WHERE PERSON_NO = #{personNo}
+ 	</update>
+ 	
+ 	<delete id="deletePerson">
+ 		DELETE
+ 		  FROM PERSON
+ 		 WHERE PERSON_NO = #{personNo}
+ 	</delete>
+ 
+ 
+ 
+ 
+ 
+ </mapper>

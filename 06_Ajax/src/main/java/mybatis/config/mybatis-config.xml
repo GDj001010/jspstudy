@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+	<!-- db.properties 경로 설정하기 resource -->
+	<properties resource="mybatis/config/db.properties" />	<!-- 프로퍼티 가져오는 태그 properties -->
+	
+	<!-- settings 설정 카멜케이스로 true 사용 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<!-- typeAliases 별명 -->
+	<typeAliases>
+		<typeAlias alias="Member" type="domain.Member"/> <!-- mapper에서 사용 domain 패키지에 BbsDTO를 Bbs로 부르겠다. -->
+	</typeAliases>
+	
+	<!-- 환경 설정 environments -->
+ 	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+    			<property name="driver" value="${driver}"/>
+       			<property name="url" value="${url}"/>
+        		<property name="username" value="${username}"/>
+        		<property name="password" value="${password}"/>
+      		</dataSource>
+    	</environment>
+ 	</environments>
+	
+ 	<!-- mapper 경로 설정하기 resource -->
+ 	<mappers>
+    	<mapper resource="mybatis/mapper/member.xml"/>
+  	</mappers>
+
+
+
+
+
+
+
+
+
+
+</configuration>
