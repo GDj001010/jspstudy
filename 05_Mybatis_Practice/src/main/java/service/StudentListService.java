@@ -9,8 +9,11 @@ import repository.StudentDAO;
 public class StudentListService implements IStudentService {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("students", StudentDAO.getInstance().selectAllStudentList());
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		StudentDAO dao = StudentDAO.getInstance();
+		request.setAttribute("students", dao.selectAllStudentList());
+		request.setAttribute("count", dao.getAllCountStudent());
+		
 		return new ActionForward("student/list.jsp", false);
 	}
 

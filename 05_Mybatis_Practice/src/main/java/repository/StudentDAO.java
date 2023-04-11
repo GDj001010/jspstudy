@@ -2,7 +2,7 @@ package repository;
 
 import java.io.InputStream;
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -34,6 +34,7 @@ public class StudentDAO {
 	
 	private final String NS = "mybatis.mapper.student.";
 	
+	// 목록
 	public List<Student> selectAllStudentList() {
 		SqlSession ss = factory.openSession();
 		
@@ -43,6 +44,7 @@ public class StudentDAO {
 		return students;
 	}
 	
+	// 상세
 	public Student selectDetailStudent(int stuNo) {
 		SqlSession ss = factory.openSession();
 		
@@ -53,6 +55,7 @@ public class StudentDAO {
 		return student;
 	}
 	
+	// 삽입
 	public int insertStudent(Student student) {
 		SqlSession ss = factory.openSession(false);
 		
@@ -64,7 +67,22 @@ public class StudentDAO {
 		return insertResult;
 	}
 	
-
+	public int getAllCountStudent() {
+		SqlSession ss = factory.openSession();
+		
+		int count = ss.selectOne(NS + "getAllCountStudent");
+		ss.close();
+		return count;
+	}
+	
+	// 조호된 학생 점수 평균
+	public double getFindStudentAverage(Map<String, Double> map) {
+		SqlSession ss = factory.openSession();
+		
+		double average = ss.selectOne(NS + "getFindStudentAverage", map);
+		ss.close();
+		return average;
+	}
 	
 	
 	

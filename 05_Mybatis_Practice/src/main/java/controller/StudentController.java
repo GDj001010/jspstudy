@@ -35,10 +35,18 @@ public class StudentController extends HttpServlet {
 		case "/add.do":
 			service = new StudentAddService();
 			break;
+		case "/find.do":
+			
+		case "/write.do":
+			af = new ActionForward("student/write.jsp", false);
 		}
 		
 		if(service != null) {
-			af = service.execute(request, response);
+			try {
+				af = service.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		if(af != null) {
