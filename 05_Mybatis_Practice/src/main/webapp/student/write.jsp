@@ -13,7 +13,7 @@
 <body>
 
 	<script>
-		$(function){
+		$(function(){
 			$('btn_list').on('click', function(ev){
 				location.href = '${contextPath}/list.do';
 			})
@@ -39,7 +39,7 @@
 					return;
 				}
 			})
-		}
+		})
 	</script>
 	
 	<div>

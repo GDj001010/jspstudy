@@ -15,7 +15,7 @@
 <body>
 
 	<script>
-		$(function){
+		$(function(){
 			$('#btn_insert').on('click', function(ev){
 				location.href = '${contextPath}/write.do';
 			})
@@ -32,7 +32,7 @@
 				}
 				location.href = '${contextPath}/find.do?begin=' + begin + '&end=' + end;
 			})
-		}
+		})
 		
 		
 		
