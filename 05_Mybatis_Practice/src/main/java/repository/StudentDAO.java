@@ -84,9 +84,29 @@ public class StudentDAO {
 		return average;
 	}
 	
+	// 삭제
+	public int deleteStudent(int stuNo) {
+		SqlSession ss = factory.openSession(false);
+		int deleteResult = ss.delete(NS + "deleteStudent", stuNo);
+		if(deleteResult == 1) {
+			ss.commit();
+		}
+		ss.close();
+		return deleteResult;
+	}
 	
-	
-	
+	// 수정
+	public int updateStudent(Student student) {
+		
+		SqlSession ss = factory.openSession(false);
+		int updateResult = ss.update(NS + "updateStudent", student);
+		if(updateResult == 1) {
+			ss.commit();
+		}
+		ss.close();
+
+		return updateResult;
+	}
 	
 	
 	

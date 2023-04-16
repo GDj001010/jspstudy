@@ -59,6 +59,32 @@
 		  FROM STUDENT
 		 WHERE AVE BETWEEN #{begin} AND #{end}
 	</select>
+	
+	<!-- 삭제 -->
+	<delete id="deleteStudent" parameterType="int">
+		DELETE
+		  FROM STUDENT
+		 WHERE STU_NO = #{stuNo}
+	</delete>
+	
+	<!-- 수정 -->
+	<update id="updateStudent" parameterType="Student">
+		UPDATE STUDENT
+		   SET NAME = #{name}
+		   	 , KOR = #{kor}
+		   	 , ENG = #{eng}
+		   	 , MATH = #{math}
+		   	 , AVE = (#{kor} + #{eng} + #{math}) / 3
+		   	 , GRADE = (CASE
+		   	 			 WHEN (#{kor} + #{eng} + #{math}) / 3 >= 90 THEN 'A'
+		   	 			 WHEN (#{kor} + #{eng} + #{math}) / 3 >= 80 THEN 'B'
+		   	 			 WHEN (#{kor} + #{eng} + #{math}) / 3 >= 70 THEN 'C'
+		   	 			 WHEN (#{kor} + #{eng} + #{math}) / 3 >= 60 THEN 'D'
+		   	 			 ELSE 'F'
+		   	 			 END)
+		WHERE STU_NO = #{stuNo}
+		   	 			 
+	</update>
 
 
 

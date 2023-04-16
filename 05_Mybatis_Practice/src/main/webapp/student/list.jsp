@@ -15,6 +15,15 @@
 <body>
 
 	<script>
+		function fnRemove(stuNo){
+			if(confirm('학생 정보를 삭제할까요?')){
+				location.href = '${contextPath}/remove.do?stuNo=' + stuNo;
+			}
+		}
+		function fnDatil(stuNo){
+			location.href = '${contextPath}/detail.do?stuNo=' + stuNo;
+		}
+	
 		$(function(){
 			$('#btn_insert').on('click', function(ev){
 				location.href = '${contextPath}/write.do';
@@ -32,6 +41,7 @@
 				}
 				location.href = '${contextPath}/find.do?begin=' + begin + '&end=' + end;
 			})
+			
 		})
 		
 		
@@ -85,8 +95,8 @@
 						<td>${student.ave }</td>
 						<td>${student.grade }</td>
 						<td>
-						<input type="button" value="상세" id="btn_detail">
-						<input type="button" value="삭제" id="btn_delete">
+						<input type="button" value="상세" onclick="fnDatil(${student.stuNo})">
+						<input type="button" value="삭제" onclick="fnRemove(${student.stuNo})">
 						</td>
 					</tr>
 				</c:forEach>
